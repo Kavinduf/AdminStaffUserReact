@@ -30,40 +30,44 @@ const EditProfile = () => {
     //   </Container>
     // </Navbar>
     <div>
-      <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="form-container border border-2 border-light-subtle  pt-4 p-5 rounded shadow-sm bg-light">
-          <h2 class="text-center fw-bold p-3 ps-0 ">Edit Profile</h2>
+      <div className="container d-flex justify-content-center align-items-center vh-100">
+        <div className="form-container border border-2 border-light-subtle  pt-4 p-5 rounded shadow-sm bg-light">
+          <h2 className="text-center fw-bold p-3 ps-0 ">Edit Profile</h2>
 
           {/* input fields start */}
-          <div class="d-flex flex-row mt-3">
-            <div class="mb-1" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">First Name</label>
-              <input class="form-control" type="text" placeholder="John" />
+          <div className="d-flex flex-row mt-3">
+            <div className="mb-1" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">First Name</label>
+              <input className="form-control" type="text" placeholder="John" />
             </div>
-            <div class="mb-1 ms-4" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">Last Name</label>
-              <input class="form-control" type="text" placeholder="Donald" />
+            <div className="mb-1 ms-4" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">Last Name</label>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Donald"
+              />
             </div>
           </div>
-          <div class="d-flex flex-row mt-3">
-            <div class="mb-1" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">Date of Birth</label>
-              <input class="form-control" type="date" />
+          <div className="d-flex flex-row mt-3">
+            <div className="mb-1" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">Date of Birth</label>
+              <input className="form-control" type="date" />
             </div>
-            <div class="mb-1 ms-4" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">Phone Number</label>
+            <div className="mb-1 ms-4" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">Phone Number</label>
               <input
-                class="form-control"
+                className="form-control"
                 type="text"
                 placeholder="0761231231"
                 maxlength="10"
               />
             </div>
           </div>
-          <div class="d-flex flex-row mt-3">
-            <div class="mb-1" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">Gender</label>
-              <select class="form-control">
+          <div className="d-flex flex-row mt-3">
+            <div className="mb-1" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">Gender</label>
+              <select className="form-control">
                 <option value="none" selected disabled hidden>
                   Select gender
                 </option>
@@ -71,9 +75,9 @@ const EditProfile = () => {
                 <option value="female">Female</option>
               </select>
             </div>
-            <div class="mb-1 ms-4" style={{ width: "300px" }}>
-              <label class="px-1 pb-1">Role</label>
-              <select class="form-control">
+            <div className="mb-1 ms-4" style={{ width: "300px" }}>
+              <label className="px-1 pb-1">Role</label>
+              <select className="form-control">
                 <option value="none" selected disabled hidden>
                   Select role
                 </option>
@@ -83,22 +87,22 @@ const EditProfile = () => {
               </select>
             </div>
           </div>
-          <div class="d-flex flex-row mt-3">
-            <div class="mb-4" style={{ width: "300px" }}>
-              <label class="px-1 pb-1 ">Email</label>
+          <div className="d-flex flex-row mt-3">
+            <div className="mb-4" style={{ width: "300px" }}>
+              <label className="px-1 pb-1 ">Email</label>
               <input
-                class="form-control "
+                className="form-control "
                 type="email"
                 placeholder="John@gmail.com"
                 disabled
               />
             </div>
-            <div class="mb-4 ms-4">
-              <label class="px-1 pb-1" style={{ width: "300px" }}>
+            <div className="mb-4 ms-4">
+              <label className="px-1 pb-1" style={{ width: "300px" }}>
                 Password
               </label>
               <input
-                class="form-control"
+                className="form-control"
                 type="password"
                 placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
               />
@@ -107,10 +111,10 @@ const EditProfile = () => {
 
           {/* input fields End */}
 
-          <div class="d-grid justify-content-center">
+          <div className="d-grid justify-content-center">
             <button
               type="submit"
-              class="btn btn-primary fw-bold"
+              className="btn btn-primary fw-bold"
               style={{ width: "300px" }}
             >
               Confirm

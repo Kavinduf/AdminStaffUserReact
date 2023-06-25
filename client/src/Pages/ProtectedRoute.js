@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
   // const { user } = useAppContext();
 
-  return <Navigate to="/login" />;
+  return <Navigate to="/" />;
 
   return children;
 };
