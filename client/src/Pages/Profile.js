@@ -243,12 +243,12 @@ const Profile = () => {
           </h2>
 
           {/* input fields start */}
-          <div className="">
+          <div className="px-4">
             <div className="d-flex flex-row mt-3">
               <div className="mb-1" style={{ width: "250px" }}>
                 <label className="px-1 pb-1">Full Name</label>
               </div>
-              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+              <div className="mb-1 ms-4" style={{ width: "150px" }}>
                 <label className="px-1 pb-1">
                   {userData?.fname + " " + userData?.lname}
                 </label>
@@ -258,7 +258,7 @@ const Profile = () => {
               <div className="mb-1" style={{ width: "250px" }}>
                 <label className="px-1 pb-1">Email</label>
               </div>
-              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+              <div className="mb-1 ms-4" style={{ width: "150px" }}>
                 <label className="px-1 pb-1">{userData?.email}</label>
               </div>
             </div>
@@ -267,7 +267,7 @@ const Profile = () => {
               <div className="mb-1" style={{ width: "250px" }}>
                 <label className="px-1 pb-1">Date Of Birth</label>
               </div>
-              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+              <div className="mb-1 ms-4" style={{ width: "150px" }}>
                 <label className="px-1 pb-1">{userData?.dob}</label>
               </div>
             </div>
@@ -275,7 +275,7 @@ const Profile = () => {
               <div className="mb-1" style={{ width: "250px" }}>
                 <label className="px-1 pb-1">Gender</label>
               </div>
-              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+              <div className="mb-1 ms-4" style={{ width: "150px" }}>
                 <label className="px-1 pb-1">
                   {userData?.gender[0].toUpperCase() +
                     userData?.gender.slice(1)}
@@ -286,7 +286,7 @@ const Profile = () => {
               <div className="mb-1" style={{ width: "250px" }}>
                 <label className="px-1 pb-1">Phone Number</label>
               </div>
-              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+              <div className="mb-1 ms-4" style={{ width: "150px" }}>
                 <label className="px-1 pb-1">{userData?.phoneNumber}</label>
               </div>
             </div>

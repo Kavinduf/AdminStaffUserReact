@@ -19,9 +19,13 @@ const initialState = {
 const StaffList = () => {
   const [users, setUsers] = useState([]);
   const init = async () => {
-    const response = await axios.get("http://localhost:8000/api/user/staff");
-    console.log(response.data);
-    setUsers(response.data.users);
+    try {
+      const response = await axios.get("http://localhost:8000/api/user/staff");
+      console.log(response.data);
+      setUsers(response.data.users);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     init();
