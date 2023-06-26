@@ -28,7 +28,7 @@ const StaffList = () => {
   }, []);
 
   const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [addState, setAddState] = useState(false);
   const [editUser, setEditUser] = useState(null);
   const [deleteUser, setDeleteUser] = useState(null);
@@ -68,6 +68,7 @@ const StaffList = () => {
     try {
       let response;
       if (addState) {
+        formData._id = undefined;
         response = await axios.post("http://localhost:8000/api/user", formData);
       } else {
         response = await axios.patch(
@@ -86,8 +87,18 @@ const StaffList = () => {
 
   return (
     <div>
-      <h3 className="w-full bg-secondary">User List</h3>
-      <div className="container d-flex justify-content-center align-items-center vh-100">
+      <h4
+        className="w-full  d-flex align-items-center ps-4"
+        style={{
+          height: "78px",
+          fontWeight: "500",
+          color: "white",
+          backgroundColor: "#212529",
+        }}
+      >
+        Staff List
+      </h4>
+      <div className="container d-flex justify-content-center mt-5">
         <Modal
           open={open}
           onClose={handleClose}
@@ -156,7 +167,7 @@ const StaffList = () => {
                       className="form-control"
                       type="text"
                       placeholder="0761231231"
-                      maxlength="10"
+                      maxLength="10"
                       name="phoneNumber"
                       value={formData.phoneNumber}
                       onChange={(e) =>
@@ -199,9 +210,9 @@ const StaffList = () => {
                       <option value="none" selected disabled hidden>
                         Select role
                       </option>
-                      <option value="user">User</option>
+                      {/* <option value="user">User</option> */}
                       <option value="staff">Staff</option>
-                      <option value="admin">Administrator</option>
+                      {/* <option value="admin">Administrator</option> */}
                     </select>
                   </div>
                 </div>

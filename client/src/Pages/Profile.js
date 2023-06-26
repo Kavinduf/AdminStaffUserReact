@@ -4,8 +4,6 @@ import { MdClose } from "react-icons/md";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import { Alert } from "bootstrap";
-import { colors } from "@mui/material";
 import { useAppContext } from "../Context/appContext";
 const initialState = {
   _id: "",
@@ -19,49 +17,36 @@ const initialState = {
   password: "",
 };
 
-const UserList = () => {
-  const { user: userData } = useAppContext();
-  const [users, setUsers] = useState([]);
-  const init = async () => {
-    const response = await axios.get("http://localhost:8000/api/user/user");
-    console.log(response.data);
-    setUsers(response.data.users);
-  };
-  useEffect(() => {
-    init();
-  }, []);
+const Profile = () => {
+  const { user: userData, setUser } = useAppContext();
 
   const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [addState, setAddState] = useState(false);
-  const [editUser, setEditUser] = useState(null);
-  const [deleteUser, setDeleteUser] = useState(null);
 
-  const handleAdd = () => {
-    setAddState(true);
-    setFormData(initialState);
-    setOpen(true);
-  };
-  const handleEdit = (user) => {
-    setEditUser(user);
-    setFormData(user);
-    setAddState(false);
-    // setFormData(initialState);
+  const [formData, setFormData] = useState(initialState);
+
+  const handleEdit = () => {
+    setFormData(userData);
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  const handleDelete = async (userId) => {
-    const isDelete = window.confirm("Do you want to delete?");
-    if (isDelete) {
-      console.log("Delete");
-      const response = await axios.delete(
-        "http://localhost:8000/api/user/" + userId
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let response;
+      response = await axios.patch(
+        `http://localhost:8000/api/user/${formData._id}`,
+        formData
       );
-      console.log(response.data);
-      await init();
+      const { user } = response.data;
+      console.log(user);
+      setUser(user);
+      handleClose();
+    } catch (error) {
+      console.log(error);
     }
   };
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -73,30 +58,6 @@ const UserList = () => {
     boxShadow: 24,
     // p: 4,
   };
-  const [formData, setFormData] = useState(initialState);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let response;
-      if (addState) {
-        formData._id = undefined;
-        response = await axios.post("http://localhost:8000/api/user", formData);
-      } else {
-        response = await axios.patch(
-          `http://localhost:8000/api/user/${formData._id}`,
-          formData
-        );
-      }
-      const { user } = response.data;
-      console.log(user);
-      handleClose();
-      await init();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       <h4
@@ -108,7 +69,7 @@ const UserList = () => {
           backgroundColor: "#212529",
         }}
       >
-        User List
+        Profile
       </h4>
       <div className="container d-flex justify-content-center mt-5">
         <Modal
@@ -211,21 +172,22 @@ const UserList = () => {
                   </div>
                   <div className="mb-1 ms-4" style={{ width: "300px" }}>
                     <label className="px-1 pb-1">Role</label>
-                    <select
+                    <input
                       className="form-control"
                       name="role"
+                      disabled
                       value={formData.role}
                       onChange={(e) =>
                         setFormData({ ...formData, role: e.target.value })
                       }
                     >
-                      <option value="none" selected disabled hidden>
+                      {/* <option value="none" selected disabled hidden>
                         Select role
                       </option>
                       <option value="user">User</option>
-                      {/* <option value="staff">Staff</option>
+                      <option value="staff">Staff</option>
                       <option value="admin">Administrator</option> */}
-                    </select>
+                    </input>
                   </div>
                 </div>
                 <div className="d-flex flex-row mt-3">
@@ -236,7 +198,7 @@ const UserList = () => {
                       type="email"
                       placeholder="John@gmail.com"
                       name="email"
-                      disabled={!addState}
+                      disabled
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -275,77 +237,75 @@ const UserList = () => {
             </form>
           </Box>
         </Modal>
-        <div className="form-container">
-          {/* <h2 className="text-center fw-bold p-3 ps-0 ">All users</h2> */}
-          <button
-            type="button"
-            className="btn btn-primary mb-4 shadow-sm"
-            onClick={() => handleAdd()}
-          >
-            Add
-          </button>
+        <div className="form-container border border-2 border-light-subtle  pt-4 p-5 rounded shadow-sm bg-light">
+          <h2 className="text-center fw-bold p-3 ps-0 ">
+            {userData?.role[0]?.toUpperCase() + userData?.role?.slice(1)}
+          </h2>
 
-          {/* Add section end */}
+          {/* input fields start */}
+          <div className="">
+            <div className="d-flex flex-row mt-3">
+              <div className="mb-1" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">Full Name</label>
+              </div>
+              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">
+                  {userData?.fname + " " + userData?.lname}
+                </label>
+              </div>
+            </div>
+            <div className="d-flex flex-row mt-3">
+              <div className="mb-1" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">Email</label>
+              </div>
+              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">{userData?.email}</label>
+              </div>
+            </div>
 
-          {/* table start */}
+            <div className="d-flex flex-row mt-3">
+              <div className="mb-1" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">Date Of Birth</label>
+              </div>
+              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">{userData?.dob}</label>
+              </div>
+            </div>
+            <div className="d-flex flex-row mt-3">
+              <div className="mb-1" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">Gender</label>
+              </div>
+              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">
+                  {userData?.gender[0].toUpperCase() +
+                    userData?.gender.slice(1)}
+                </label>
+              </div>
+            </div>
+            <div className="d-flex flex-row mt-3">
+              <div className="mb-1" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">Phone Number</label>
+              </div>
+              <div className="mb-1 ms-4" style={{ width: "250px" }}>
+                <label className="px-1 pb-1">{userData?.phoneNumber}</label>
+              </div>
+            </div>
+          </div>
 
-          {/* <div className=" border border-2 border-light-subtle rounded p-1  "> */}
-          <table className="table table-hover shadow">
-            <thead>
-              <tr>
-                <th scope="col" className="text-center">
-                  User ID
-                </th>
-                <th scope="col" className="text-center">
-                  Email
-                </th>
-                <th scope="col" className="text-center">
-                  Full Name
-                </th>
-                <th scope="col" className="text-center">
-                  Phone number
-                </th>
-                <th scope="col" className="text-center">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {users?.map((user) => (
-                <tr key={user._id}>
-                  <td>{user._id}</td>
-                  <td>{user.email}</td>
-                  <td>{user.fname + " " + user.lname}</td>
-                  <td>{user.phoneNumber}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-success shadow-sm"
-                      onClick={() => handleEdit(user)}
-                    >
-                      Edit
-                    </button>
-                    {userData?.role === "admin" && (
-                      <button
-                        type="button"
-                        className="btn btn-danger mx-2 shadow-sm"
-                        onClick={() => handleDelete(user._id)}
-                      >
-                        Delete
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* table end */}
+          <div className="d-grid justify-content-center mt-4">
+            <button
+              type="submit"
+              className="btn btn-primary fw-bold"
+              style={{ width: "300px" }}
+              onClick={() => handleEdit()}
+            >
+              Edit
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 
-export default UserList;
+export default Profile;

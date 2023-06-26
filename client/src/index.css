@@ -18,3 +18,32 @@ code {
 a {
   text-decoration: none !important;
 }
+.line {
+  width: 200px;
+  height: 2px;
+  background-color: rgb(179, 174, 174);
+}
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+.sidebar-btn {
+  color: white;
+  height: 50px;
+  font-size: 18px;
+  /* text-align: center; */
+  padding: 12px;
+  padding-left: 45px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.sidebar-btn:hover {
+  background-color: cadetblue;
+  transition-duration: 0.3s;
+}
+
+.linkActive {
+  background-color: cadetblue;
+}

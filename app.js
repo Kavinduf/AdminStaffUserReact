@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./Routes/userRoute.js";
+import statsRoutes from "./Routes/statsRoute.js";
 import connect from "./db/connect.js";
 
 const app = express();
@@ -14,6 +15,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/stats", statsRoutes);
 
 const init = async () => {
   try {

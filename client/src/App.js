@@ -9,6 +9,7 @@ import StaffList from "./Pages/StaffList";
 import Stats from "./Pages/Stats";
 import SharedLayout from "./Pages/SharedLayout";
 import ProtectedRoute from "./Pages/ProtectedRoute";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -17,13 +18,13 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Stats />} />
           <Route path="/user-list" element={<UserList />} />
+          <Route path="/staff-List" element={<StaffList />} />
+          <Route path="/Profile" element={<Profile />} />
         </Route>
         {/* <Route path="/" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/editProfile" element={<EditProfile />} />
-        <Route path="/userList" element={<UserList />} />
-        <Route path="/StaffList" element={<StaffList />} />
       </Routes>
     </Router>
   );
