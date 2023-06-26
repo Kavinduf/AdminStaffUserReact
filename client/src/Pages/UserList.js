@@ -58,6 +58,7 @@ const UserList = () => {
       const response = await axios.delete(
         "http://localhost:8000/api/user/" + userId
       );
+      // alert("User deleted");
       console.log(response.data);
       await init();
     }
@@ -82,11 +83,13 @@ const UserList = () => {
       if (addState) {
         formData._id = undefined;
         response = await axios.post("http://localhost:8000/api/user", formData);
+        // alert("User added");
       } else {
         response = await axios.patch(
           `http://localhost:8000/api/user/${formData._id}`,
           formData
         );
+        // alert("User details updated");
       }
       const { user } = response.data;
       console.log(user);
