@@ -46,7 +46,7 @@ const Login = () => {
           {/* form start */}
           <form onSubmit={handleSubmit}>
             <div className="mb-3" style={{ width: "300px" }}>
-              <label className="px-1 pb-1">Email</label>
+              <label className="">Email</label>
               <input
                 className="form-control"
                 type="email"
